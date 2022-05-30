@@ -1,0 +1,26 @@
+--https://en.wikipedia.org/wiki/Luhn_algorithm
+
+declare @i bigint;
+declare @str varchar(10);
+declare @sum int;
+declare @s int;
+declare @sumin int;
+
+set @i=7992739871
+set @s=1;
+set @sum=0;
+
+set @str=right('000000000'+ltrim(@i), 10); 
+
+while LEN(@str)>0
+	begin
+			set @sumin= @s*cast(left(@str,1) as bigint);
+			if @sumin>9  
+				set @sumin= @sumin%10 +1;
+			set @sum=@sum+@sumin;
+			if (@s=1) 
+				set @s=2 else set @s=1;
+			set @str=RIGHT(@str, len(@str)-1);
+	end
+
+select @i*10+(10-(@sum%10)) as check_digit_added;
