@@ -10,7 +10,7 @@ set @i=7992739871
 set @s=1;
 set @sum=0;
 
-set @str=right('000000000'+ltrim(@i), 10); 
+set @str=ltrim(@i); 
 
 while LEN(@str)>0
 	begin
